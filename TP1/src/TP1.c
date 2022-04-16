@@ -22,6 +22,9 @@ int main(void) {
 
 	int menu;
 	int opcion;
+	int kilometrosIngresados;
+	int precioIngresadoA;
+	int precioIngresadoL;
 	float debitoA;
 	float creditoA;
 	float bitcoinA;
@@ -46,28 +49,30 @@ int main(void) {
 			switch (opcion)
 			{
 			case 1:
-				utn_getFloat("\n Ingresar Kilómetros: ", 3, 0, 100000,"\n Cantidad de kilometros no valida.Intente nuevamente \n",&kilometros);
+				kilometrosIngresados = utn_getFloat("\n Ingresar Kilómetros: ", 3, 1, 100000,"\n Cantidad de kilometros no valida.Intente nuevamente \n",&kilometros);
 				printf("-------------------------------------------------------\n");
 				break;
 			case 2:
-				utn_getFloat("\n A- Precio vuelo Aerolíneas: ", 3, 1, 1000000,"\n Precio no valido.Intente nuevamente", &precioAerolineas);
-				utn_getFloat("\n A- Precio vuelo Latam: ", 3, 0, 1000000,"\n Precio no valido.Intente nuevamente", &precioLatam);
+				precioIngresadoA = utn_getFloat("\n A- Precio vuelo Aerolíneas: ", 3, 1, 1000000,"\n Precio no valido.Intente nuevamente", &precioAerolineas);
+				precioIngresadoL = utn_getFloat("\n A- Precio vuelo Latam: ", 3, 1, 1000000,"\n Precio no valido.Intente nuevamente", &precioLatam);
 				printf("-------------------------------------------------------\n");
 				break;
 			case 3:
+				if(precioIngresadoA ==-1 && precioIngresadoL ==-1 && kilometrosIngresados ==-1 )
+				{
 				calcular(precioAerolineas,kilometros,&debitoA,&creditoA,&bitcoinA,&unitarioA,&diferencia,"\n Calculos realizados exitosamente.\n");
 				calcular(precioLatam,kilometros,&debitoL,&creditoL,&bitcoinL,&unitarioL,&diferencia,"\n Calculos realizados exitosamente.\n");
-
-
+				}
+				else
+				{
+					printf("Error, no ingreso los datos previamente");
+				}
 				break;
 			case 4:
-
 				mostrar("\nAerolineas: \n",&debitoA,&creditoA,&bitcoinA,&unitarioA);
 				mostrar("\n Latam: \n",&debitoL,&creditoL,&bitcoinL,&unitarioL);
 				mostrarDif(&diferencia);
 				printf("-------------------------------------------------------\n");
-
-
 				break;
 			case 5:
 				kilometros =  7090;
@@ -78,7 +83,6 @@ int main(void) {
                 mostrar("\nAerolineas: \n",&debitoA,&creditoA,&bitcoinA,&unitarioA);
                 mostrar("\n Latam: \n",&debitoL,&creditoL,&bitcoinL,&unitarioL);
                 mostrarDif(&diferencia);
-
 				break;
 			}
 		}
